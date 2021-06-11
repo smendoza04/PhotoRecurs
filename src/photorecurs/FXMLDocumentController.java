@@ -217,8 +217,8 @@ public class FXMLDocumentController implements Initializable {
                             System.out.println("btn: " + btn);
                             try {
                                 imageSlider = new ArrayList<>();
-                                sliderMax = btn.getFile().getParentFile().listFiles().length;
-                                for (int i = 0; i < sliderMax; i++) {
+
+                                for (int i = 0; i < btn.getFile().getParentFile().listFiles().length; i++) {
                                     if (currentLocation.listFiles()[i].getName().endsWith(".jpg")
                                             || currentLocation.listFiles()[i].getName().endsWith(".png")) {
                                         imageSlider.add(btn.getFile().getParentFile().listFiles()[i]);
@@ -234,6 +234,8 @@ public class FXMLDocumentController implements Initializable {
                                         }
                                     }
                                 }
+
+                                sliderMax = imageSlider.size();
 
                                 vBoxImageDirectory.getChildren().removeAll(toggledImage);
 
