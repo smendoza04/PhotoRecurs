@@ -51,7 +51,7 @@ public class FXMLDocumentController implements Initializable {
     private ImageView imageDirectory;
     private ArrayList<File> imageSlider;
     private int slider;
-    private int sliderMax;
+    private int sliderMax = -1;
     private boolean uiChange = true;
     private ImageView favouriteImage;
 
@@ -119,7 +119,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void list(ActionEvent event) throws FileNotFoundException {
         uiChange = false;
-        showDirectoryList();
+        if (uiChange == true) {
+            showDirectoryIcon();
+        } else {
+            showDirectoryList();
+        }
         showNavigationTree();
         showFavourites();
         menuButton.setText("List");
@@ -128,14 +132,28 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void icon(ActionEvent event) throws FileNotFoundException {
         uiChange = true;
+        if (uiChange == true) {
+            showDirectoryIcon();
+        } else {
+            showDirectoryList();
+        }
         showNavigationTree();
-        showDirectoryIcon();
         showFavourites();
         menuButton.setText("Icon");
     }
 
     @FXML
     private void favourite(ActionEvent event) throws TransformerException, FileNotFoundException {
+
+        if (favouriteButton.isSelected()) {
+            System.out.println("check");
+            favourites.addElement(imageSlider.get(slider).getAbsolutePath());
+            event.consume();
+        } else {
+            System.out.println("uncheck");
+            favourites.deleteElement(imageSlider.get(slider).getAbsolutePath());
+            event.consume();
+        }
 
         if (uiChange == true) {
             showDirectoryIcon();
@@ -144,14 +162,6 @@ public class FXMLDocumentController implements Initializable {
         }
         showNavigationTree();
         showFavourites();
-
-        if (favouriteButton.isSelected()) {
-            System.out.println("check");
-            favourites.addElement(imageSlider.get(slider).getAbsolutePath());
-        } else {
-            System.out.println("uncheck");
-            favourites.deleteElement(imageSlider.get(slider).getAbsolutePath());
-        }
     }
 
     private void showFavourites() throws FileNotFoundException {
@@ -186,7 +196,6 @@ public class FXMLDocumentController implements Initializable {
                         File newFile = btn.getFile();
 
                         locationTree = newFile.getParentFile();
-                        currentLocation = newFile;
                         toggledImage.setFitWidth(197.0);
                         toggledImage.setFitHeight(192.0);
                         try {
@@ -334,30 +343,31 @@ public class FXMLDocumentController implements Initializable {
                             File newFile = btn.getFile();
 
                             locationTree = newFile.getParentFile();
-                            toggledImage.setFitWidth(197.0);
-                            toggledImage.setFitHeight(192.0);
+                            currentLocation = newFile;
+                            if (uiChange == true) {
+                                try {
+                                    showDirectoryIcon();
+                                } catch (FileNotFoundException ex) {
+                                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            } else {
+                                try {
+                                    showDirectoryList();
+                                } catch (FileNotFoundException ex) {
+                                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
                             try {
-                                toggledImage.setImage(new Image(new FileInputStream(imageSlider.get(slider))));
+                                showNavigationTree();
                             } catch (FileNotFoundException ex) {
                                 Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                             }
-
-                            toggledName.setText(imageSlider.get(slider).getName());
-                            SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                            toggledDate.setText(df.format(currentLocation.lastModified()));
-                            toggledPath.setText(imageSlider.get(slider).getAbsolutePath());
-                            pathLocation.setText(currentLocation.getAbsolutePath());
                             try {
-                                if (uiChange == true) {
-                                    showDirectoryIcon();
-                                } else {
-                                    showDirectoryList();
-                                }
-                                showNavigationTree();
                                 showFavourites();
                             } catch (FileNotFoundException ex) {
                                 Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                             }
+
                         }
                     });
 
@@ -374,6 +384,14 @@ public class FXMLDocumentController implements Initializable {
                     buttonDirectory.setGraphic(imageDirectory);
                     buttonDirectory.setStyle("-fx-cursor: hand; -fx-background-color: transparent;");
                     buttonDirectory.setContentDisplay(ContentDisplay.TOP);
+
+                    if (sliderMax > 0) {
+                        if (favourites.contains(imageSlider.get(slider).getAbsolutePath())) {
+                            favouriteButton.setSelected(true);
+                        } else {
+                            favouriteButton.setSelected(false);
+                        }
+                    }
 
                     buttonDirectory.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
@@ -406,10 +424,17 @@ public class FXMLDocumentController implements Initializable {
 
                                 toggledImage.setFitWidth(197.0);
                                 toggledImage.setFitHeight(192.0);
-                                toggledImage.setImage(new Image(new FileInputStream(imageSlider.get(slider))));
-                                toggledName.setText(btn.getText());
-                                SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
+                                try {
+                                    if (sliderMax > 0) {
+                                        toggledImage.setImage(new Image(new FileInputStream(imageSlider.get(slider))));
+                                    }
+                                } catch (FileNotFoundException ex) {
+                                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+
+                                toggledName.setText(imageSlider.get(slider).getName());
+                                SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
                                 toggledDate.setText(df.format(currentLocation.lastModified()));
                                 toggledPath.setText(imageSlider.get(slider).getAbsolutePath());
                                 pathLocation.setText(currentLocation.getAbsolutePath());
