@@ -168,7 +168,16 @@ public class FXMLDocumentController implements Initializable {
                     @Override
                     public void handle(ActionEvent event) {
                         ButtonDirectory btn = (ButtonDirectory) event.getSource();
-
+                        ArrayList<File> newSlider = new ArrayList<>();
+                        slider = 0;
+                        for(int y = 0; y < favourites.getAllImages().size(); y++){
+                            newSlider.add(new File(favourites.getAllImages().get(y)));
+                            if (favourites.getAllImages().get(y).equals(btn.getFile().getAbsolutePath())) {
+                                slider = y;
+                            }
+                        }
+                        imageSlider = newSlider;
+                        sliderMax = imageSlider.size();
                         File newFile = btn.getFile();
 
                         locationTree = newFile.getParentFile();
@@ -199,8 +208,9 @@ public class FXMLDocumentController implements Initializable {
                         }
                     }
                 });
+                vBoxFav.getChildren().addAll(buttonFav);
             }
-            vBoxFav.getChildren().addAll(buttonFav);
+            
         }
 
     }
