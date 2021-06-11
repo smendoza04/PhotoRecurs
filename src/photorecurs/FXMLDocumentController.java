@@ -30,9 +30,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -115,9 +113,7 @@ public class FXMLDocumentController implements Initializable {
             showFavourites();
             pathLocation.setText(currentLocation.getAbsolutePath());
             System.out.println(locationTree);
-
         }
-
     }
 
     @FXML
@@ -140,15 +136,15 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void favourite(ActionEvent event) throws TransformerException, FileNotFoundException {
-        
+
         if (uiChange == true) {
-                showDirectoryIcon();
-            } else {
-                showDirectoryList();
-            }
-            showNavigationTree();
-            showFavourites();
-        
+            showDirectoryIcon();
+        } else {
+            showDirectoryList();
+        }
+        showNavigationTree();
+        showFavourites();
+
         if (favouriteButton.isSelected()) {
             System.out.println("check");
             favourites.addElement(imageSlider.get(slider).getAbsolutePath());
@@ -179,7 +175,7 @@ public class FXMLDocumentController implements Initializable {
                         ButtonDirectory btn = (ButtonDirectory) event.getSource();
                         ArrayList<File> newSlider = new ArrayList<>();
                         slider = 0;
-                        for(int y = 0; y < favourites.getAllImages().size(); y++){
+                        for (int y = 0; y < favourites.getAllImages().size(); y++) {
                             newSlider.add(new File(favourites.getAllImages().get(y)));
                             if (favourites.getAllImages().get(y).equals(btn.getFile().getAbsolutePath())) {
                                 slider = y;
@@ -219,7 +215,7 @@ public class FXMLDocumentController implements Initializable {
                 });
                 vBoxFav.getChildren().addAll(buttonFav);
             }
-            
+
         }
 
     }
@@ -238,16 +234,15 @@ public class FXMLDocumentController implements Initializable {
         toggledDate.setText(df.format(currentLocation.lastModified()));
         toggledPath.setText(imageSlider.get(slider).getAbsolutePath());
         pathLocation.setText(currentLocation.getAbsolutePath());
-        
+
         if (uiChange == true) {
-                showDirectoryIcon();
-            } else {
-                showDirectoryList();
-            }
-            showNavigationTree();
-            showFavourites();
-        
-        
+            showDirectoryIcon();
+        } else {
+            showDirectoryList();
+        }
+        showNavigationTree();
+        showFavourites();
+
     }
 
     @FXML
@@ -265,15 +260,14 @@ public class FXMLDocumentController implements Initializable {
         toggledDate.setText(df.format(currentLocation.lastModified()));
         toggledPath.setText(imageSlider.get(slider).getAbsolutePath());
         pathLocation.setText(currentLocation.getAbsolutePath());
-        
+
         if (uiChange == true) {
-                showDirectoryIcon();
-            } else {
-                showDirectoryList();
-            }
-            showNavigationTree();
-            showFavourites();
-        
+            showDirectoryIcon();
+        } else {
+            showDirectoryList();
+        }
+        showNavigationTree();
+        showFavourites();
 
     }
 
