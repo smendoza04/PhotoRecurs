@@ -238,6 +238,16 @@ public class FXMLDocumentController implements Initializable {
         toggledDate.setText(df.format(currentLocation.lastModified()));
         toggledPath.setText(imageSlider.get(slider).getAbsolutePath());
         pathLocation.setText(currentLocation.getAbsolutePath());
+        
+        if (uiChange == true) {
+                showDirectoryIcon();
+            } else {
+                showDirectoryList();
+            }
+            showNavigationTree();
+            showFavourites();
+        
+        
     }
 
     @FXML
@@ -255,6 +265,15 @@ public class FXMLDocumentController implements Initializable {
         toggledDate.setText(df.format(currentLocation.lastModified()));
         toggledPath.setText(imageSlider.get(slider).getAbsolutePath());
         pathLocation.setText(currentLocation.getAbsolutePath());
+        
+        if (uiChange == true) {
+                showDirectoryIcon();
+            } else {
+                showDirectoryList();
+            }
+            showNavigationTree();
+            showFavourites();
+        
 
     }
 
@@ -321,7 +340,6 @@ public class FXMLDocumentController implements Initializable {
                             File newFile = btn.getFile();
 
                             locationTree = newFile.getParentFile();
-                            currentLocation = newFile;
                             toggledImage.setFitWidth(197.0);
                             toggledImage.setFitHeight(192.0);
                             try {
