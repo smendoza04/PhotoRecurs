@@ -7,13 +7,12 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -33,20 +32,11 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button fx:id="redo" mnemonicParsing="false" onAction="#redo">
-                            <graphic>
-                                <ImageView fitHeight="33.0" fitWidth="26.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@gfx/redo.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="1027.0" spacing="10.0">
                     <children>
-                        <MenuButton alignment="CENTER" contentDisplay="TEXT_ONLY" mnemonicParsing="false" prefHeight="32.0" prefWidth="92.0" text="View" textAlignment="CENTER">
+                        <MenuButton fx:id="menuButton" alignment="CENTER" contentDisplay="TEXT_ONLY" mnemonicParsing="false" prefHeight="32.0" prefWidth="92.0" text="Icon" textAlignment="CENTER">
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#list" text="List" />
                                 <MenuItem mnemonicParsing="false" onAction="#icon" text="Icon" />
@@ -59,150 +49,118 @@
         </HBox>
     </top>
     <center>
-        <ScrollPane prefHeight="524.0" prefWidth="699.0" BorderPane.alignment="CENTER">
+        <ScrollPane prefHeight="534.0" prefWidth="675.0" BorderPane.alignment="CENTER">
             <content>
-            <FlowPane fx:id="centerFlowPane" prefHeight="505.0" prefWidth="690.0">
-               <children>
-                  <VBox fx:id="vBoxCenter" prefHeight="514.0" prefWidth="722.0" />
-               </children>
-            </FlowPane>
+                <FlowPane fx:id="centerFlowPane" prefHeight="531.0" prefWidth="677.0">
+                    <children>
+                        <VBox fx:id="vBoxCenter" prefHeight="529.0" prefWidth="673.0" style="-fx-background-color: transparent;" />
+                    </children>
+                </FlowPane>
             </content>
         </ScrollPane>
     </center>
     <right>
-        <VBox fx:id="vBoxImageDirectory" alignment="CENTER" prefHeight="524.0" prefWidth="329.0" style="-fx-border-color: #bfbfbf;" BorderPane.alignment="CENTER">
+        <VBox fx:id="vBoxImageDirectory" alignment="CENTER" prefHeight="534.0" prefWidth="331.0" style="-fx-border-color: #bfbfbf;" BorderPane.alignment="CENTER">
             <children>
-            <Button fx:id="favouriteButton" mnemonicParsing="false" onAction="#favourite" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView blendMode="OVERLAY" fitHeight="33.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@gfx/star.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <HBox alignment="CENTER" prefHeight="192.0" prefWidth="345.0">
+            <HBox alignment="TOP_RIGHT" prefHeight="133.0" prefWidth="327.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#sliderLeft" prefHeight="25.0" prefWidth="29.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
-                     <graphic>
-                        <ImageView fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@gfx/prev.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     
-                              </Button>
-                      <ImageView fx:id="toggledImage" fitHeight="192.0" fitWidth="197.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button layoutX="10.0" layoutY="113.0" mnemonicParsing="false" onAction="#sliderRight" prefHeight="25.0" prefWidth="29.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
-                     <graphic>
-                        <ImageView fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@gfx/next.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
+                      <ToggleButton fx:id="favouriteButton" mnemonicParsing="false" onAction="#favourite">
+                          <graphic>
+                              <ImageView fitHeight="33.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@gfx/star.png" />
+                                  </image>
+                                  <cursor>
+                                      <Cursor fx:constant="HAND" />
+                                  </cursor>
+                              </ImageView>
+                          </graphic>
+                      </ToggleButton>
                </children>
             </HBox>
+                <HBox alignment="CENTER" prefHeight="192.0" prefWidth="345.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#sliderLeft" prefHeight="25.0" prefWidth="29.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@gfx/prev.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                     
+                        </Button>
+                        <ImageView fx:id="toggledImage" fitHeight="257.0" fitWidth="239.0" pickOnBounds="true" />
+                        <Button layoutX="10.0" layoutY="113.0" mnemonicParsing="false" onAction="#sliderRight" prefHeight="25.0" prefWidth="29.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@gfx/next.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </HBox>
                 <HBox prefHeight="24.0" prefWidth="214.0">
                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 900;" text=" Name: " />
                         <Text fx:id="toggledName" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 400;" />
                     </children>
                 </HBox>
-            <HBox prefHeight="24.0" prefWidth="214.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 900;" text=" Type: " />
-                  <Text fx:id="toggledType" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 400;" />
-               </children>
-            </HBox>
-            <HBox prefHeight="24.0" prefWidth="214.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 900;" text=" Last Modified: " />
-                  <Text fx:id="toggledDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 400;" />
-               </children>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="303.0" prefHeight="24.0" prefWidth="214.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 900;" text=" Path: " />
-                  <Text fx:id="toggledPath" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 400;" />
-               </children>
-            </HBox>
+                <HBox prefHeight="24.0" prefWidth="214.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 900;" text=" Type: " />
+                        <Text fx:id="toggledType" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 400;" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="24.0" prefWidth="214.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 900;" text=" Last Modified: " />
+                        <Text fx:id="toggledDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 400;" />
+                    </children>
+                </HBox>
+                <HBox layoutX="10.0" layoutY="303.0" prefHeight="24.0" prefWidth="214.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 900;" text=" Path: " />
+                        <Text fx:id="toggledPath" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 400;" />
+                    </children>
+                </HBox>
             </children>
         </VBox>
     </right>
     <left>
-        <SplitPane dividerPositions="0.29118773946360155" orientation="VERTICAL" prefHeight="524.0" prefWidth="227.0" BorderPane.alignment="CENTER">
+        <SplitPane dividerPositions="0.36973180076628354" orientation="VERTICAL" prefHeight="524.0" prefWidth="268.0" BorderPane.alignment="CENTER">
             <items>
                 <ScrollPane prefHeight="245.0" prefWidth="218.0">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="153.0" prefWidth="212.0">
-                            <children>
-                                <Pane layoutX="-12.0" layoutY="-3.0" prefHeight="35.0" prefWidth="198.0">
-                                    <children>
-                                        <ImageView fitHeight="46.0" fitWidth="32.0" layoutX="46.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@gfx/star.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Text layoutX="78.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Favourites" textAlignment="CENTER" wrappingWidth="83.72003173828125">
-                                            <font>
-                                                <Font size="18.0" />
-                                            </font>
-                                        </Text>
-                                    </children>
-                                </Pane>
-                        <Button layoutX="59.0" layoutY="38.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Directory">
-                           <graphic>
-                              <ImageView fx:id="imageTree" fitHeight="46.0" fitWidth="36.0" layoutX="46.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@gfx/dir.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Button>
-                            </children>
-                        </AnchorPane>
+                  <VBox fx:id="vBoxFav" prefHeight="190.0" prefWidth="252.0" />
                     </content>
                 </ScrollPane>
-                <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="399.0" prefWidth="201.0">
+                <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="351.0" prefWidth="241.0">
                     <content>
-                  <VBox fx:id="vBoxTree" prefHeight="398.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="buttonTree" mnemonicParsing="false" prefHeight="48.0" prefWidth="204.0" style="-fx-background-color: transparent;" text="Directories">
-                           <graphic>
-                              <ImageView fitHeight="46.0" fitWidth="36.0" layoutX="46.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@gfx/dir.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </VBox>
+                        <VBox fx:id="vBoxTree" prefHeight="398.0" prefWidth="200.0">
+                            <children>
+                                <Button fx:id="buttonTree" mnemonicParsing="false" prefHeight="48.0" prefWidth="204.0" style="-fx-background-color: transparent;" text="Directories">
+                                    <graphic>
+                                        <ImageView fx:id="imageTree" fitHeight="46.0" fitWidth="36.0" layoutX="46.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@gfx/dir.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </VBox>
                     </content>
                 </ScrollPane>
             </items>
         </SplitPane>
     </left>
     <bottom>
-        <Text fx:id="pathLocation" strokeWidth="0.0" textAlignment="CENTER" BorderPane.alignment="CENTER">
-            <font>
-                <Font size="19.0" />
-            </font>
-        </Text>
+        <Text fx:id="pathLocation" strokeWidth="0.0" textAlignment="CENTER" BorderPane.alignment="CENTER" />
     </bottom>
 </BorderPane>
