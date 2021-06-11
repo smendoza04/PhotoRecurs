@@ -65,6 +65,8 @@ public class FXMLDocumentController implements Initializable {
     private VBox vBoxTree;
 
     @FXML
+    private VBox vBoxCenter;
+    @FXML
     private VBox vBoxImageDirectory;
     @FXML
     private ImageView toggledImage;
@@ -119,9 +121,15 @@ public class FXMLDocumentController implements Initializable {
         slider--;
         System.out.println(slider);
         if (slider < 0) {
-            slider = sliderMax - 3;
+            slider = sliderMax - 1;
         }
         toggledImage.setImage(new Image(new FileInputStream(imageSlider.get(slider))));
+        toggledImage.setImage(new Image(new FileInputStream(imageSlider.get(slider))));
+        toggledName.setText(imageSlider.get(slider).getName());
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        toggledDate.setText(df.format(currentLocation.lastModified()));
+        toggledPath.setText(imageSlider.get(slider).getAbsolutePath());
+        pathLocation.setText(currentLocation.getAbsolutePath());
     }
 
     @FXML
@@ -134,6 +142,11 @@ public class FXMLDocumentController implements Initializable {
             slider = 0;
         }
         toggledImage.setImage(new Image(new FileInputStream(imageSlider.get(slider))));
+        toggledName.setText(imageSlider.get(slider).getName());
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        toggledDate.setText(df.format(currentLocation.lastModified()));
+        toggledPath.setText(imageSlider.get(slider).getAbsolutePath());
+        pathLocation.setText(currentLocation.getAbsolutePath());
 
     }
 
@@ -158,8 +171,138 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+//    public void showDirectoryIcon() throws FileNotFoundException {
+//        centerFlowPane.getChildren().clear();
+//        pathFinder.setText(currentLocation.getAbsolutePath());
+//        if (Files.exists(this.currentLocation.toPath())) {
+//
+//            for (int i = 0; i < currentLocation.listFiles().length; i++) {
+//                if (currentLocation.listFiles()[i].isDirectory()) {
+//
+//                    imageDirectory = new ImageView(new Image(new FileInputStream("./src/photorecurs/gfx/dir.png")));
+//
+//                    imageDirectory.setFitHeight(95.0);
+//                    imageDirectory.setFitWidth(90.0);
+//
+//                    buttonDirectory = new ButtonDirectory(currentLocation.listFiles()[i]);
+//                    buttonDirectory.setText(currentLocation.listFiles()[i].getName());
+//                    buttonDirectory.setGraphic(imageDirectory);
+//                    buttonDirectory.setStyle("-fx-cursor: hand; -fx-background-color: transparent;");
+//                    buttonDirectory.setContentDisplay(ContentDisplay.TOP);
+//
+//                    buttonDirectory.setOnAction(new EventHandler<ActionEvent>() {
+//                        @Override
+//                        public void handle(ActionEvent event) {
+//                            ButtonDirectory btn = (ButtonDirectory) event.getSource();
+//
+//                            File newFile = btn.getFile();
+//
+//                            locationTree = newFile.getParentFile();
+//                            currentLocation = newFile;
+//                            toggledImage.setFitWidth(197.0);
+//                            toggledImage.setFitHeight(192.0);
+//                            try {
+//                                toggledImage.setImage(new Image(new FileInputStream(imageSlider.get(slider))));
+//                            } catch (FileNotFoundException ex) {
+//                                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+//                            }
+//
+//                            toggledName.setText(imageSlider.get(slider).getName());
+//                            SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+//                            toggledDate.setText(df.format(currentLocation.lastModified()));
+//                            toggledPath.setText(imageSlider.get(slider).getAbsolutePath());
+//                            pathLocation.setText(currentLocation.getAbsolutePath());
+//                            try {
+//                                showDirectoryIcon();
+//                                showNavigationTree();
+//                            } catch (FileNotFoundException ex) {
+//                                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+//                            }
+//                        }
+//                    });
+//
+//                    centerFlowPane.getChildren().addAll(buttonDirectory);
+//                } else if (currentLocation.listFiles()[i].getName().endsWith(".jpg")
+//                        || currentLocation.listFiles()[i].getName().endsWith(".png")) {
+//                    imageDirectory = new ImageView(new Image(new FileInputStream(currentLocation.listFiles()[i].getAbsolutePath())));
+//
+//                    imageDirectory.setFitHeight(95.0);
+//                    imageDirectory.setFitWidth(90.0);
+//
+//                    buttonDirectory = new ButtonDirectory(currentLocation.listFiles()[i]);
+//                    buttonDirectory.setText(currentLocation.listFiles()[i].getName());
+//                    buttonDirectory.setGraphic(imageDirectory);
+//                    buttonDirectory.setStyle("-fx-cursor: hand; -fx-background-color: transparent;");
+//                    buttonDirectory.setContentDisplay(ContentDisplay.TOP);
+//
+//                    buttonDirectory.setOnAction(new EventHandler<ActionEvent>() {
+//                        @Override
+//                        public void handle(ActionEvent event) {
+//                            ButtonDirectory btn = (ButtonDirectory) event.getSource();
+//                            System.out.println("btn: " + btn);
+//                            try {
+//                                imageSlider = new ArrayList<>();
+//
+//                                for (int i = 0; i < btn.getFile().getParentFile().listFiles().length; i++) {
+//                                    if (currentLocation.listFiles()[i].getName().endsWith(".jpg")
+//                                            || currentLocation.listFiles()[i].getName().endsWith(".png")) {
+//                                        imageSlider.add(btn.getFile().getParentFile().listFiles()[i]);
+//
+//                                        if (currentLocation.listFiles()[i].getName().endsWith(".jpg")) {
+//                                            toggledType.setText(".jpg");
+//                                        } else if (currentLocation.listFiles()[i].getName().endsWith(".png")) {
+//                                            toggledType.setText(".png");
+//                                        }
+//
+//                                        if (btn.getFile().getParentFile().listFiles()[i].equals(btn.getFile())) {
+//                                            slider = i - 1;
+//                                        }
+//                                    }
+//                                }
+//
+//                                sliderMax = imageSlider.size();
+//
+//                                vBoxImageDirectory.getChildren().removeAll(toggledImage);
+//
+//                                toggledImage.setFitWidth(197.0);
+//                                toggledImage.setFitHeight(192.0);
+//                                toggledImage.setImage(new Image(new FileInputStream(imageSlider.get(slider))));
+//                                toggledName.setText(btn.getText());
+//                                SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+//
+//                                toggledDate.setText(df.format(currentLocation.lastModified()));
+//                                toggledPath.setText(imageSlider.get(slider).getAbsolutePath());
+//                                pathLocation.setText(currentLocation.getAbsolutePath());
+//
+//                                showDirectoryIcon();
+//                                showNavigationTree();
+//
+//                            } catch (FileNotFoundException ex) {
+//                                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+//                            }
+//
+//                        }
+//                    });
+//
+//                    centerFlowPane.getChildren().addAll(buttonDirectory);
+//                }
+//
+//            }
+//        } else {
+//            centerFlowPane.getChildren().clear();
+//            Text noPathFound = new Text("Path not Found");
+//            noPathFound.setStyle("-fx-font-size: 18px;");
+//            noPathFound.setTextAlignment(TextAlignment.CENTER);
+//            centerFlowPane.setAlignment(Pos.CENTER);
+//            centerFlowPane.getChildren().add(noPathFound);
+//        }
+//
+//    }
     public void showDirectoryIcon() throws FileNotFoundException {
         centerFlowPane.getChildren().clear();
+        vBoxCenter.getChildren().clear();
+        vBoxImageDirectory.getChildren().removeAll(toggledImage);
+
         pathFinder.setText(currentLocation.getAbsolutePath());
         if (Files.exists(this.currentLocation.toPath())) {
 
@@ -168,14 +311,14 @@ public class FXMLDocumentController implements Initializable {
 
                     imageDirectory = new ImageView(new Image(new FileInputStream("./src/photorecurs/gfx/dir.png")));
 
-                    imageDirectory.setFitHeight(95.0);
-                    imageDirectory.setFitWidth(90.0);
+                    imageDirectory.setFitHeight(46.0);
+                    imageDirectory.setFitWidth(36.0);
 
                     buttonDirectory = new ButtonDirectory(currentLocation.listFiles()[i]);
                     buttonDirectory.setText(currentLocation.listFiles()[i].getName());
                     buttonDirectory.setGraphic(imageDirectory);
                     buttonDirectory.setStyle("-fx-cursor: hand; -fx-background-color: transparent;");
-                    buttonDirectory.setContentDisplay(ContentDisplay.TOP);
+                    buttonDirectory.setContentDisplay(ContentDisplay.LEFT);
 
                     buttonDirectory.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
@@ -186,6 +329,19 @@ public class FXMLDocumentController implements Initializable {
 
                             locationTree = newFile.getParentFile();
                             currentLocation = newFile;
+                            toggledImage.setFitWidth(197.0);
+                            toggledImage.setFitHeight(192.0);
+                            try {
+                                toggledImage.setImage(new Image(new FileInputStream(imageSlider.get(slider))));
+                                System.out.println("img slider: " + imageSlider.get(slider));
+                            } catch (FileNotFoundException ex) {
+                                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+                            toggledName.setText(imageSlider.get(slider).getName());
+                            SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+                            toggledDate.setText(df.format(currentLocation.lastModified()));
+                            toggledPath.setText(imageSlider.get(slider).getAbsolutePath());
                             pathLocation.setText(currentLocation.getAbsolutePath());
                             try {
                                 showDirectoryIcon();
@@ -195,20 +351,21 @@ public class FXMLDocumentController implements Initializable {
                             }
                         }
                     });
+                    vBoxCenter.getChildren().add(buttonDirectory);
+                    centerFlowPane.getChildren().addAll(vBoxCenter);
 
-                    centerFlowPane.getChildren().addAll(buttonDirectory);
                 } else if (currentLocation.listFiles()[i].getName().endsWith(".jpg")
                         || currentLocation.listFiles()[i].getName().endsWith(".png")) {
                     imageDirectory = new ImageView(new Image(new FileInputStream(currentLocation.listFiles()[i].getAbsolutePath())));
 
-                    imageDirectory.setFitHeight(95.0);
-                    imageDirectory.setFitWidth(90.0);
+                    imageDirectory.setFitHeight(46.0);
+                    imageDirectory.setFitWidth(36.0);
 
                     buttonDirectory = new ButtonDirectory(currentLocation.listFiles()[i]);
                     buttonDirectory.setText(currentLocation.listFiles()[i].getName());
                     buttonDirectory.setGraphic(imageDirectory);
                     buttonDirectory.setStyle("-fx-cursor: hand; -fx-background-color: transparent;");
-                    buttonDirectory.setContentDisplay(ContentDisplay.TOP);
+                    buttonDirectory.setContentDisplay(ContentDisplay.LEFT);
 
                     buttonDirectory.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
@@ -232,12 +389,13 @@ public class FXMLDocumentController implements Initializable {
                                         if (btn.getFile().getParentFile().listFiles()[i].equals(btn.getFile())) {
                                             slider = i - 1;
                                         }
+                                        else {
+                                            slider = 0;
+                                        }
                                     }
                                 }
 
                                 sliderMax = imageSlider.size();
-
-                                vBoxImageDirectory.getChildren().removeAll(toggledImage);
 
                                 toggledImage.setFitWidth(197.0);
                                 toggledImage.setFitHeight(192.0);
@@ -246,6 +404,7 @@ public class FXMLDocumentController implements Initializable {
                                 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
                                 toggledDate.setText(df.format(currentLocation.lastModified()));
+                                toggledPath.setText(imageSlider.get(slider).getAbsolutePath());
                                 pathLocation.setText(currentLocation.getAbsolutePath());
 
                                 showDirectoryIcon();
@@ -258,7 +417,7 @@ public class FXMLDocumentController implements Initializable {
                         }
                     });
 
-                    centerFlowPane.getChildren().addAll(buttonDirectory);
+                    vBoxCenter.getChildren().add(buttonDirectory);
                 }
 
             }
@@ -301,7 +460,7 @@ public class FXMLDocumentController implements Initializable {
 
                         locationTree = newFile.getParentFile();
                         currentLocation = newFile;
-                        pathLocation.setText(currentLocation.getAbsolutePath());
+                        pathLocation.setText(newFile.toString());
                         try {
                             showDirectoryIcon();
                             showNavigationTree();

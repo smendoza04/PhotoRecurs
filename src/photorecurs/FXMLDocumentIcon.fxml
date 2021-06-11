@@ -61,11 +61,25 @@
     <center>
         <ScrollPane prefHeight="524.0" prefWidth="699.0" BorderPane.alignment="CENTER">
             <content>
-            <FlowPane fx:id="centerFlowPane" prefHeight="505.0" prefWidth="690.0">
+            <FlowPane fx:id="centerFlowPane" prefHeight="516.0" prefWidth="721.0">
                <children>
-                  <VBox fx:id="vBoxCenter" prefHeight="514.0" prefWidth="722.0" />
-               </children>
-            </FlowPane>
+                  <VBox prefHeight="514.0" prefWidth="722.0">
+                     <children>
+                        <Button fx:id="buttonTree1" mnemonicParsing="false" prefHeight="48.0" prefWidth="204.0" style="-fx-background-color: transparent;" text="Directories">
+                           <graphic>
+                              <ImageView fitHeight="46.0" fitWidth="36.0" layoutX="46.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@gfx/dir.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children></FlowPane>
             </content>
         </ScrollPane>
     </center>
