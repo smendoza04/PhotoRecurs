@@ -139,13 +139,22 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void favourite(ActionEvent event) throws TransformerException {
+    private void favourite(ActionEvent event) throws TransformerException, FileNotFoundException {
+        
+        if (uiChange == true) {
+                showDirectoryIcon();
+            } else {
+                showDirectoryList();
+            }
+            showNavigationTree();
+            showFavourites();
+        
         if (favouriteButton.isSelected()) {
             System.out.println("check");
-            favourites.addElement(currentLocation.getAbsoluteFile().toString());
+            favourites.addElement(imageSlider.get(slider).getAbsolutePath());
         } else {
             System.out.println("uncheck");
-            favourites.deleteElement(currentLocation.getAbsoluteFile().toString());
+            favourites.deleteElement(imageSlider.get(slider).getAbsolutePath());
         }
     }
 
