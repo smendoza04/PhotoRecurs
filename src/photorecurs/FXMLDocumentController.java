@@ -400,7 +400,7 @@ public class FXMLDocumentController implements Initializable {
                             System.out.println("btn: " + btn);
                             try {
                                 imageSlider = new ArrayList<>();
-
+                                int sliderNum = 0;
                                 for (int i = 0; i < btn.getFile().getParentFile().listFiles().length; i++) {
                                     if (currentLocation.listFiles()[i].getName().endsWith(".jpg")
                                             || currentLocation.listFiles()[i].getName().endsWith(".png")) {
@@ -413,8 +413,9 @@ public class FXMLDocumentController implements Initializable {
                                         }
 
                                         if (btn.getFile().getParentFile().listFiles()[i].equals(btn.getFile())) {
-                                            slider = i - 1;
+                                            slider = sliderNum;
                                         }
+                                        slider++;
                                     }
                                 }
 
@@ -550,7 +551,7 @@ public class FXMLDocumentController implements Initializable {
                             System.out.println("btn: " + btn);
                             try {
                                 imageSlider = new ArrayList<>();
-
+                                int sliderNum = 0;
                                 for (int i = 0; i < btn.getFile().getParentFile().listFiles().length; i++) {
                                     if (currentLocation.listFiles()[i].getName().endsWith(".jpg")
                                             || currentLocation.listFiles()[i].getName().endsWith(".png")) {
@@ -563,10 +564,9 @@ public class FXMLDocumentController implements Initializable {
                                         }
 
                                         if (btn.getFile().getParentFile().listFiles()[i].equals(btn.getFile())) {
-                                            slider = i - 1;
-                                        } else {
-                                            slider = 0;
-                                        }
+                                            slider = sliderNum;
+                                        } 
+                                        slider++;
                                     }
                                 }
 
