@@ -260,7 +260,7 @@ public class FXMLDocumentController implements Initializable {
         slider++;
         System.out.println(slider);
 
-        if (slider == sliderMax - 1) {
+        if (slider == sliderMax) {
             slider = 0;
         }
         toggledImage.setImage(new Image(new FileInputStream(imageSlider.get(slider))));
