@@ -23,8 +23,8 @@ public class PhotoRecurs extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
             
             Scene scene = new Scene(root);
-            stage.setMaximized(true);
-            stage.setFullScreen(true);
+            stage.setMaximized(false);
+            stage.setFullScreen(false);
             stage.setTitle("Photo Organizer");
             stage.setScene(scene);
             stage.show();

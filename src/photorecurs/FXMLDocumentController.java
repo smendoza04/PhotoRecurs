@@ -414,8 +414,9 @@ public class FXMLDocumentController implements Initializable {
 
                                         if (btn.getFile().getParentFile().listFiles()[i].equals(btn.getFile())) {
                                             slider = sliderNum;
+                                            System.out.println(i);
                                         }
-                                        slider++;
+                                        sliderNum++;
                                     }
                                 }
 
@@ -428,6 +429,7 @@ public class FXMLDocumentController implements Initializable {
 
                                 try {
                                     if (sliderMax > 0) {
+                                        System.out.println("slider " + slider);
                                         toggledImage.setImage(new Image(new FileInputStream(imageSlider.get(slider))));
                                     }
                                 } catch (FileNotFoundException ex) {
@@ -565,9 +567,11 @@ public class FXMLDocumentController implements Initializable {
 
                                         if (btn.getFile().getParentFile().listFiles()[i].equals(btn.getFile())) {
                                             slider = sliderNum;
+                                            System.out.println(i);
                                         } 
-                                        slider++;
+                                        sliderNum++;
                                     }
+                                    
                                 }
 
                                 sliderMax = imageSlider.size();
